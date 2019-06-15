@@ -65,7 +65,7 @@ steps:
   - name: php74-unit
     depends_on: [ rebuild-cache ]
     image: phpdaily/php:7.4-dev
-    errignore: true
+    failure: ignore
     commands:
       - php -v
       - ./libraries/vendor/bin/phpunit
@@ -73,7 +73,7 @@ steps:
   - name: php80-unit
     depends_on: [ rebuild-cache ]
     image: phpdaily/php:8.0-dev
-    errignore: true
+    failure: ignore
     commands:
       - php -v
       - ./libraries/vendor/bin/phpunit
@@ -103,7 +103,7 @@ steps:
     image: joomlaprojects/docker-systemtests:develop
     commands:
       - bash tests/Codeception/drone-system-run.sh "$(pwd)"
-    shm_size: 1024000000  
+    shm_size: 1024000000
 
   - name: api-tests
     depends_on: [ system-tests ]
@@ -117,7 +117,7 @@ steps:
     when:
       repo:
         - joomla/joomla-cms
-      branch: 
+      branch:
         - 4.0-dev
     commands:
       - export RIPS_BASE_URI='https://api.rips.joomla.org'
@@ -157,6 +157,6 @@ services:
 
 ---
 kind: signature
-hmac: 7a21c6aea556265ed7346bd4c5a2e7afb15128303fe6bcce3594f3737f08ffb4
+hmac: bf17f63c5dafc3df5c95c4f51bd2ec9a5b78ab5ccb8a9580248b00647ae300e6
 
 ...
